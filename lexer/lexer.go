@@ -1,6 +1,6 @@
 package lexer
 
-import "github.com/cowellmi/stint/internal/token"
+import "github.com/cowellmi/stint/token"
 
 type Lexer struct {
 	tagged       bool // state for inside %...%
@@ -24,7 +24,7 @@ func (l *Lexer) NextToken() token.Token {
 	// State control
 	if l.ch == '%' {
 		l.tagged = !l.tagged // toggle state
-		tok := newToken(token.PERCENT, l.ch)
+		tok := newToken(token.TAG, l.ch)
 		l.readChar()
 		return tok
 	}

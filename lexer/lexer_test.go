@@ -3,7 +3,7 @@ package lexer
 import (
 	"testing"
 
-	"github.com/cowellmi/stint/internal/token"
+	"github.com/cowellmi/stint/token"
 )
 
 func TestNextToken(t *testing.T) {
@@ -15,11 +15,11 @@ Welcome to area %abc:int:foo(1,   2)%.`
 		expectedLiteral string
 	}{
 		{token.RAW, "Hello "},
-		{token.PERCENT, "%"},
+		{token.TAG, "%"},
 		{token.IDENT, "name"},
-		{token.PERCENT, "%"},
+		{token.TAG, "%"},
 		{token.RAW, "!\nWelcome to area "},
-		{token.PERCENT, "%"},
+		{token.TAG, "%"},
 		{token.IDENT, "abc"},
 		{token.COLON, ":"},
 		{token.IDENT, "int"},
@@ -30,7 +30,7 @@ Welcome to area %abc:int:foo(1,   2)%.`
 		{token.COMMA, ","},
 		{token.INT, "2"},
 		{token.RPAREN, ")"},
-		{token.PERCENT, "%"},
+		{token.TAG, "%"},
 		{token.RAW, "."},
 		{token.EOF, ""},
 	}

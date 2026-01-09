@@ -17,9 +17,9 @@ const (
 	RAW   = "RAW"
 
 	// Delimiters
-	PERCENT = "%"
-	COLON   = ":"
-	LPAREN  = "("
-	RPAREN  = ")"
-	COMMA   = ","
+	TAG    = "%"
+	COLON  = ":"
+	LPAREN = "("
+	RPAREN = ")"
+	COMMA  = ","
 )
