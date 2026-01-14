@@ -39,6 +39,16 @@ func (t *Template) Execute(w io.Writer, env map[string]string) error {
 	return nil
 }
 
+func (t *Template) Vars() []*ast.InterpolationNode {
+	var vars []*ast.InterpolationNode
+	for _, n := range t.tree.Nodes {
+		if v, ok := n.(*ast.InterpolationNode); ok {
+			vars = append(vars, v)
+		}
+	}
+	return vars
+}
+
 func eval(node ast.Node, env map[string]string) (string, error) {
 	switch n := node.(type) {
 	case *ast.RawNode:
