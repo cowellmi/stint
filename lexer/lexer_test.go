@@ -6,7 +6,7 @@ import (
 	"github.com/cowellmi/stint/token"
 )
 
-func TestNextToken(t *testing.T) {
+func TestLexer(t *testing.T) {
 	input := `Hello %name%!
 Welcome to area %abc:int:foo(1,   2)%.`
 

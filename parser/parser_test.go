@@ -7,14 +7,14 @@ import (
 	"github.com/cowellmi/stint/lexer"
 )
 
-func TestStringInterpolation(t *testing.T) {
+func TestParser(t *testing.T) {
 	input := "foo%bar:int:len(2)%"
 
 	l := lexer.New(input)
 	p := New(l)
 
-	tmpl := p.ParseTemplate()
-	if tmpl == nil {
+	tree := p.ParseTemplate()
+	if tree == nil {
 		t.Fatalf("ParseTemplate() returned nil")
 	}
 
@@ -22,24 +22,24 @@ func TestStringInterpolation(t *testing.T) {
 		t.Errorf("parser has %d errors: %v", len(p.Errors()), p.Errors())
 	}
 
-	if len(tmpl.Nodes) != 2 {
-		t.Fatalf("tmpl.Nodes does not contain 2 nodes. got=%d",
-			len(tmpl.Nodes))
+	if len(tree.Nodes) != 2 {
+		t.Fatalf("tree.Nodes does not contain 2 nodes. got=%d",
+			len(tree.Nodes))
 	}
 
 	// Raw node
-	rnode, ok := tmpl.Nodes[0].(*ast.RawNode)
+	rnode, ok := tree.Nodes[0].(*ast.RawNode)
 	if !ok {
-		t.Fatalf("node[0] is not *ast.RawNode. got=%T", tmpl.Nodes[0])
+		t.Fatalf("node[0] is not *ast.RawNode. got=%T", tree.Nodes[0])
 	}
 	if rnode.Value != "foo" {
 		t.Errorf("rnode.Value wrong. expected=%q, got=%q", "foo", rnode.Value)
 	}
 
 	// Interpolation node
-	inode, ok := tmpl.Nodes[1].(*ast.InterpolationNode)
+	inode, ok := tree.Nodes[1].(*ast.InterpolationNode)
 	if !ok {
-		t.Fatalf("node[1] is not *ast.InterpolationNode. got=%T", tmpl.Nodes[1])
+		t.Fatalf("node[1] is not *ast.InterpolationNode. got=%T", tree.Nodes[1])
 	}
 
 	if inode.Name.Value != "bar" {

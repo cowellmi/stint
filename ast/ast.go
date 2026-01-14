@@ -6,11 +6,11 @@ type Node interface {
 	TokenLiteral() string
 }
 
-type Template struct {
+type TemplateNode struct {
 	Nodes []Node
 }
 
-func (t *Template) TokenLiteral() string {
+func (t *TemplateNode) TokenLiteral() string {
 	if len(t.Nodes) > 0 {
 		return t.Nodes[0].TokenLiteral()
 	} else {

@@ -27,8 +27,8 @@ func (p *Parser) Errors() []string {
 	return p.errors
 }
 
-func (p *Parser) ParseTemplate() *ast.Template {
-	t := &ast.Template{}
+func (p *Parser) ParseTemplate() *ast.TemplateNode {
+	t := &ast.TemplateNode{}
 	for p.curTok.Type != token.EOF {
 		n := p.parseNode()
 		if n != nil {
